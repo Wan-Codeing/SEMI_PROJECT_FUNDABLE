@@ -55,8 +55,8 @@ JSP+SERVLET 기반 펀딩사이트
 - 신고하기 등록
 
 #### 관리자 페이지 <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A9%94%EC%9D%B8-Page)" >상세보기 - WIKI이동</a>
-- 게시판 및 목록 조회/검색
 - 공지사항 글 등록
 - 펀딩 승인 처리
 - 상품 삭제 및 회원 상태 관리
 - 문의 답변 및 신고접수
+- -환불 처리
