@@ -43,6 +43,7 @@ JSP+SERVLET 기반 펀딩사이트
 #### 메인 페이지 - <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A9%94%EC%9D%B8-Page)" >상세보기 - WIKI이동</a>
 - 추천 상품 목록 등록 및 상세보기
 - 메인 상품들 이미지 슬라이드(CSS)
+- 간단한 QnA창
 
 #### 펀딩 페이지 - <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A9%94%EC%9D%B8-Page)" >상세보기 - WIKI이동</a>
 - 펀딩/오픈예정 상품 목록 나열
