@@ -28,13 +28,13 @@ JSP+SERVLET 기반 펀딩사이트
 - 이메일 인증
 - Id중복체크
 
-#### 마이 페이지 - <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(Member)" >상세보기 - WIKI 이동</a>
+#### 마이 페이지 - <a href="https://github.com/Wan-Codeing/SEMI_PROJECT_FUNDABLE/wiki/%EC%A3%BC%EC%9A%94%EA%B8%B0%EB%8A%A5%EC%86%8C%EA%B0%9C(%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80)" >상세보기 - WIKI 이동</a>
 - 주소 API 연동
 - 펀딩상품 조회/예약 취소
 - 찜한상품 상세 조회
 - 문의 내역 조회
 
-#### 셀러 페이지 - <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EC%98%81%ED%99%94-%EC%98%88%EB%A7%A4)" >상세보기 - WIKI 이동</a>
+#### 셀러 페이지 - <a href="https://github.com/Wan-Codeing/SEMI_PROJECT_FUNDABLE/wiki/%EC%A3%BC%EC%9A%94%EA%B8%B0%EB%8A%A5%EC%86%8C%EA%B0%9C(%EC%85%80%EB%9F%AC%ED%8E%98%EC%9D%B4%EC%A7%80)" >상세보기 - WIKI 이동</a>
 - 프로젝트 상품등록
 - 프로젝트 리워드(옵션)등록
 - 상품 현황 조회
