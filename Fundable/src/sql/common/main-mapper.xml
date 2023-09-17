@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectMainImage1">
+		SELECT 
+			CHANGE_NAME,
+			FILE_PATH,
+			PRODUCT_TITLE,
+			PRICE,
+			COUNT,
+			FUND_PRICE,
+			PRODUCT_NO
+		FROM IMAGE
+		JOIN PRODUCT USING (PRODUCT_NO)
+		WHERE FILE_LEVEL = 20
+	</entry>
+	<entry key="selectMainImage2">
+		SELECT 
+			CHANGE_NAME,
+			FILE_PATH,
+			PRODUCT_TITLE,
+			PRICE,
+			COUNT,
+			FUND_PRICE,
+			PRODUCT_NO
+		FROM IMAGE
+		JOIN PRODUCT USING (PRODUCT_NO)
+		WHERE FILE_LEVEL = 1
+	</entry>
+	<entry key="selectMainImage3">
+		SELECT 
+			CHANGE_NAME,
+			FILE_PATH,
+			PRODUCT_TITLE,
+			PRICE,
+			COUNT,
+			FUND_PRICE,
+			PRODUCT_NO
+		FROM IMAGE
+		JOIN PRODUCT USING (PRODUCT_NO)
+		WHERE FILE_LEVEL = 1 AND FUNDING_YN = 'N'
+	</entry>
+	<entry key="selectMainImage4">
+		SELECT 
+			CHANGE_NAME,
+			FILE_PATH,
+			PRODUCT_TITLE,
+			PRICE,
+			COUNT,
+			FUND_PRICE,
+			PRODUCT_NO
+		FROM IMAGE
+		JOIN PRODUCT USING (PRODUCT_NO)
+		WHERE FILE_LEVEL = 1 AND FUNDING_YN = 'Y'
+	</entry>
+	
+	<entry key="selectMainRanking">
+		SELECT 
+			PRODUCT_TITLE,
+			PRICE,
+			COUNT,
+			FUND_PRICE,
+			PRODUCT_NO
+		FROM PRODUCT
+		WHERE PRODUCT_NO IN (48,44,46,45,47,43)
+		ORDER BY COUNT
+	</entry>
+	<entry key="inputImgchoi">
+		SELECT CHANGE_NAME,FILE_PATH,PRODUCT_TITLE,PRODUCT_NO,CATEGORY_NO
+		FROM IMAGE
+		JOIN PRODUCT USING(PRODUCT_NO)
+		WHERE FILE_LEVEL = 1 AND PRODUCT_TITLE LIKE ?
+		ORDER BY PRODUCT_NO DESC
+	</entry>
+</properties>

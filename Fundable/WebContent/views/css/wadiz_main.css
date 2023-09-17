@@ -1,0 +1,272 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+*{
+    text-decoration: none;
+    box-sizing: border-box;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-family: "Pretendard";
+    background-color: "blue";
+}
+body{
+    width :  calc(100vw - (100vw - 100%));
+}
+#header{
+    width :  calc(100vw - (100vw - 100%));
+    height : 6vh;
+}
+#body{
+    width :  calc(100vw - (100vw - 100%));
+    font-size: 1em;
+}
+.VisualBanner_container{
+    width :  calc(100vw - (100vw - 100%));
+    height : 40vh;
+}
+.main_slider{
+    width:100%;
+    height:100%;
+}
+.main_slider_img img{
+    width: 100%;
+    height: 374px;
+}
+/* Main-slider */
+/* 추천 프로젝트*/
+.Recommendation_container{
+    width :  calc(100vw - (100vw - 100%));
+    height : 68vh;
+    align-items: center;
+}
+.Recommendation_container>.main_wrap{
+    display: flex;
+    height: 100%;
+    margin : 0 231px; 
+    padding: 40px 80px;
+}
+.Recommendation_project{
+    width : 70%;
+    padding-right: 60px;
+}
+.Recommendation_subTitle{
+    width: 100%;
+    line-height: 20px;
+    font-size: 1em;
+}
+.Recommendation_Title{
+    display: block;
+    padding-left : 20px;
+    font-size:28px;
+    font-weight: bold;
+}
+.Recommendation_subTitle>p{
+    padding-top:10px;
+    padding-left : 20px;
+    padding-bottom: 15px;
+}
+.Recommendation_cardListGroup{
+    display: flex;
+    flex-wrap: wrap;
+   width: 100%;
+   height: 213px;
+}
+.Recommendation_card{
+    width : calc(100%/3);
+    height: 100%;
+    padding: 0 10px;
+}
+.Recommendation_card>img{
+    width : 100%;
+}
+.Recommendation_Progress{
+    display: flex;
+    height: 20%;
+}
+.Recommendation_text{
+    width :70%;
+    height : 100%;
+    font-size: 15px;
+}
+.Recommendation_Num{
+    font-size: x-large;
+    height: 100%;
+    line-height: normal;
+    padding-left: 15px;
+    padding-top:5px;
+}
+.Ranking{
+    height: 100%;
+    padding-left:60px;
+}
+.Rangking_tab{
+    height : 38px;
+    padding : 0 0 15px;
+    display: inline-flex;
+    padding-bottom: 15px;
+    width: 100%;
+    font-size: 0;
+}
+.Rangking_tab button{
+    width : 80px;
+    height: 20px;
+    font-size: 15px;
+    border: none;
+    background-color: white;
+}
+.Ranking_Article{
+    width: 100%;
+    height: 80%;
+}
+.Ranking_Content{
+    width: 100%;
+    height: 20%;
+    display: flex;
+}
+.Ranking_Content>.num{
+    font-size: x-large;
+}
+.Ranking_Title{
+    width:70%;
+    margin : 5px;
+}
+.Ranking_Text{
+    width:100%;
+    height: 65%;
+}
+.Ranking_Text>a{
+    bottom : 15px;
+}
+.Ranking_Num{
+    padding-top: 8px;
+}
+.Ranking_Image{
+    width:28%;
+    margin :5px;
+}
+/* 오픈예정 */
+.Open_container{
+    width :  calc(100vw - (100vw - 100%));
+    height:  52vh;
+}
+.Open_container>.main_wrap{
+    height: 100%;
+    margin : 0 231px;
+    padding: 40px 80px;
+}
+.Open_header{
+    height : 60px;
+    margin : 8px 0 ;
+}
+.Open_header>h2{
+    font-size: 28px;
+}
+.Open_header>p{
+    font-size: 14px;
+}
+.Open_content{
+    width:100%;
+    height:80%;
+}
+.Open_Title{
+    padding : 0 10px 5px 10px;
+    height:200px;
+}
+.Open_Title img{
+    width:100%;
+    height:240px;
+}
+.Open_Title p{
+    font-size: 14px;
+}
+.Open_Title a{
+    font-size: 16px;
+}
+
+/* 펀딩 */
+.Funding_container{
+    width :  calc(100vw - (100vw - 100%));
+    height:52vh;
+}
+
+.Funding_container>.main_wrap{
+    height: 100%;
+    margin : 0 231px;
+    padding: 40px 80px;
+}
+.Funding_header{
+    height : 60px;
+    margin : 8px 0 ;
+}
+.Funding_header>h2{
+    font-size: 28px;
+}
+.Funding_header>p{
+    font-size: 14px;
+}
+.Funding_content{
+    width:100%;
+    height:80%;
+}
+.Funding_Title{
+    padding : 0 10px 5px 10px;
+    height:200px;
+}
+.Funding_Title img{
+    width:100%;
+    height:240px;
+}
+.Funding_Title p{
+    font-size: 14px;
+}
+.Funding_Title a{
+    font-size: 16px;
+}
+/* 배너 */
+.banner_container{
+    width :  calc(100vw - (100vw - 100%));
+    height : 48vh;
+    align-items: center;
+}
+.banner_wrap{
+    height: 100%;
+    margin : 0 231px;
+    padding: 40px 80px;
+}
+.banner_content{
+    background-image: url("https://static.wadiz.kr/main/media/img-fundingopen.77139347.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 300px;
+    text-align: center;
+}
+.banner_text>h4{
+    color: #fff;
+    font-weight: 700;
+    padding-top : 82px;
+    font-size: 36px;
+    line-height: 44px;
+}
+.banner_text>p{
+    font-size:15px;
+    color:#fff;
+    padding-top: 8px;
+    margin-bottom: 30px;
+}
+.ban_btn{
+    width:150px;
+    height: 50px;
+    background-color: #00c4c4;
+    border-radius: 5%;
+}
+.ban_btn>p{
+    font-size: 16px ;
+    line-height: 1.75;
+    color:white;
+}
+
+
+
+
+

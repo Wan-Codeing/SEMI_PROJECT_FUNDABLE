@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectDeliveryList">
+		SELECT 
+			PRODUCT_NO,
+			USER_NAME,
+			TOTAL_PRICE,
+			REFUND_STATUS,
+			FUNDING_DATE,
+			USER_ADDRESS,
+			DELIVERY
+		FROM PAY_HISTORY
+		JOIN MEMBER USING (USER_NO)
+	</entry>
+	
+	<entry key="selectFListCount">
+        SELECT COUNT(*)
+        FROM PRODUCT
+        WHERE FUNDING_YN = 'C'
+    </entry>
+
+    <entry key="selectFList">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT *
+        FROM PRODUCT
+        WHERE FUNDING_YN = 'C') A)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="denyFunding">
+        UPDATE PRODUCT
+        SET FUNDING_YN = 'E'
+        WHERE PRODUCT_NO = ?
+    </entry>
+
+    <entry key="accessFunding">
+        UPDATE PRODUCT
+        SET FUNDING_YN = 'N'
+        WHERE PRODUCT_NO = ?
+    </entry>
+
+    <entry key="selectPListCount">
+        SELECT COUNT(*)
+        FROM PRODUCT
+        WHERE FUNDING_YN IN ('Y', 'N')
+    </entry>
+
+    <entry key="selectPList">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT *
+        FROM PRODUCT
+        WHERE FUNDING_YN IN ('Y', 'N')) A)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="searchPListCount0">
+        SELECT COUNT(*)
+        FROM PRODUCT
+        WHERE FUNDING_YN IN ('Y', 'N')
+        AND PRODUCT_TITLE LIKE ?
+    </entry>
+
+    <entry key="searchPListCount1">
+        SELECT COUNT(*)
+        FROM PRODUCT
+        WHERE FUNDING_YN IN ('Y', 'N')
+        AND PRODUCT_TITLE LIKE ?
+        AND CATEGORY_NO = ?
+    </entry>
+
+    <entry key="searchPList0">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT *
+        FROM PRODUCT
+        WHERE FUNDING_YN IN ('Y', 'N')
+        AND PRODUCT_TITLE LIKE ?) A)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="searchPList1">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT *
+        FROM PRODUCT
+        WHERE FUNDING_YN IN ('Y', 'N')
+        AND PRODUCT_TITLE LIKE ?
+        AND CATEGORY_NO = ?) A)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="selectProduct">
+        SELECT *
+        FROM PRODUCT
+        WHERE PRODUCT_NO = ?
+    </entry>
+
+	<entry key="selectOption">
+        SELECT *
+        FROM P_OPTION
+        WHERE OPTION_NO = ?
+    </entry>
+	<entry key="selectProductImg">
+		SELECT 
+			CHANGE_NAME,
+			FILE_PATH,
+			PRODUCT_TITLE,
+			PRICE,
+			COUNT,
+			FUND_PRICE,
+			PRODUCT_NO
+		FROM IMAGE
+		JOIN PRODUCT USING (PRODUCT_NO)
+		WHERE FILE_LEVEL = 1
+	</entry>
+	
+	<!-- 준호형 파트 -->
+	<entry key="insertThumbnailBoard">
+		INSERT INTO PRODUCT 
+		VALUES (SEQ_PNO.NEXTVAL, ?, ?, ?, ?, ?, ?, SYSDATE, TO_DATE(? , 'YYYY-MM-DD'), TO_DATE(? , 'YYYY-MM-DD'),? , 'C' , ? )
+	</entry>
+	
+	<entry key="insertAttachmentList">
+		INSERT INTO IMAGE
+		VALUES (SEQ_FNO.NEXTVAL, SEQ_PNO.CURRVAL, ? , ?, ?, 100, ?, SYSDATE, ?, 'Y')
+	</entry>
+	<entry key="insertReward">
+		INSERT INTO P_OPTION(PRODUCT_NO, OPTION_NO, OPTION_NAME, OPTION_PRICE, OPTION_DESCRIPTION)
+		VALUES(?, 1, ?, ?, ?)	
+	</entry>
+	<entry key="checkReward">
+		SELECT PRODUCT_NO
+		FROM P_OPTION
+		WHERE PRODUCT_NO = ?
+	</entry>
+	<entry key="selectDeliveryList1">
+			SELECT P.PRODUCT_NO, 
+				   P.TOTAL_PRICE,
+				   P.FUNDING_DATE,
+				   P.DELIVERY,
+				   M.USER_NAME,
+				   P.REFUND_STATUS,
+				   M.USER_ADDRESS,
+				   P.PRODUCT_TITLE
+		    FROM PAY_HISTORY P
+            JOIN MEMBER M ON P.USER_NO = M.USER_NO
+			WHERE P.DELIVERY LIKE 'C' AND P.SELLER_NiCKNAME = ?
+	</entry>
+	<entry key="selectDeliveryList2">
+			SELECT P.PRODUCT_NO, 
+				   P.TOTAL_PRICE,
+				   P.FUNDING_DATE,
+				   P.DELIVERY,
+				   M.USER_NAME,
+				   P.REFUND_STATUS,
+				   M.USER_ADDRESS,
+				   P.PRODUCT_TITLE
+		    FROM PAY_HISTORY P
+            JOIN MEMBER M ON P.USER_NO = M.USER_NO
+			WHERE P.DELIVERY LIKE 'N' AND P.SELLER_NiCKNAME = ?
+	</entry>
+	<entry key="selectDeliveryList3">
+			SELECT P.PRODUCT_NO, 
+				   P.TOTAL_PRICE,
+				   P.FUNDING_DATE,
+				   P.DELIVERY,
+				   M.USER_NAME,
+				   P.REFUND_STATUS,
+				   M.USER_ADDRESS,
+				   P.PRODUCT_TITLE
+		    FROM PAY_HISTORY P
+            JOIN MEMBER M ON P.USER_NO = M.USER_NO
+			WHERE P.DELIVERY LIKE 'Y' AND P.SELLER_NiCKNAME = ?
+	</entry>
+	<entry key="searchAccount">
+		SELECT PRODUCT_TITLE, END_DATE, PRICE, COUNT
+		FROM MEMBER 
+		JOIN PRODUCT ON USER_NICKNAME = SELLER_NICKNAME 
+		WHERE USER_NO = ?
+	</entry>
+		<entry key="selectFund">
+			SELECT PRODUCT_TITLE, 
+				   PRODUCT_NO,
+				   CATEGORY_NO,
+				   FUND_PRICE,
+				   END_DATE,
+				   PRICE,
+				   COUNT,
+				   SYSDATE
+		    FROM PRODUCT
+			WHERE PRODUCT_NO = ?
+	</entry>
+	<entry key="selectProImg">
+		SELECT I.FILE_PATH,  I.CHANGE_NAME, I.PRODUCT_NO
+      	FROM IMAGE I
+        JOIN MEMBER M ON M.USER_NO = I.USER_NO
+     	WHERE M.USER_NO = ? AND FILE_LEVEL = 1
+     	ORDER BY PRODUCT_NO DESC
+	</entry>
+	
+	<entry key="selectProfile">
+		SELECT FILE_PATH, CHANGE_NAME, PRODUCT_NO
+		FROM IMAGE
+		WHERE USER_NO = ? AND FILE_LEVEL = 999
+	</entry>
+	
+	<!-- 정준 파트 -->
+	<!-- 펀딩 상품  -->
+<entry key="inputImgchoi">
+SELECT CHANGE_NAME,FILE_PATH,PRODUCT_TITLE,PRODUCT_NO,CATEGORY_NO,FUNDING_YN
+FROM IMAGE
+JOIN PRODUCT USING(PRODUCT_NO)
+WHERE FILE_LEVEL = 1
+ORDER BY PRODUCT_NO DESC
+
+</entry>
+
+<!-- 펀딩 슬라이드 상품 -->
+<entry key ="inputSlideImg">
+
+   SELECT CHANGE_NAME,FILE_PATH
+   FROM IMAGE
+   JOIN PRODUCT USING (PRODUCT_NO)
+   WHERE OPEN_DATE-SYSDATE &lt; 0
+
+</entry>
+
+
+<entry key="inputProductFood">
+	SELECT * <!-- 뭘갖고오지?  -->
+	FROM (SELECT *
+		FROM IMAGE
+		JOIN PRODUCT USING  (PRODUCT_NO)
+		JOIN CATEGORY USING  (CATEGORY_NO))
+	WHERE CATEGORY_NO = 5;
+</entry>
+
+
+<!-- 오픈 슬라이드 상품 -->
+<entry key="inputOpenSlideImg">
+      SELECT CHANGE_NAME,FILE_PATH
+      FROM IMAGE
+      WHERE OPEN_DATE-SYSDATE &gt; 0
+      AND FILE_LEVL=1
+</entry>
+
+<!-- 오픈 날짜 슬라이드 상품 -->
+<entry key="inputOpenViewSlideImg">
+
+   SELECT CHANGE_NAME,FILE_PATH,PRODUCT_TITLE
+   FROM IMAGE
+   JOIN PRODUCT USING(PRODUCT_NO)
+   WHERE OPEN_DATE-SYSDATE &gt; 0
+   AND FILE_LEVEL=1
+
+</entry>
+
+
+<!-- 메인 이미지 가져오기 -->
+<entry key="fundingStoryImage">
+
+	SELECT CHANGE_NAME,FILE_PATH
+	FROM IMAGE
+	JOIN PRODUCT USING (PRODUCT_NO)
+	WHERE PRODUCT_NO = ?  AND FILE_LEVEL=1
+	
+</entry>
+
+<entry key="fundingStoryInputImage">
+
+   SELECT CHANGE_NAME,FILE_PATH
+   FROM IMAGE
+   JOIN PRODUCT USING (PRODUCT_NO)
+   WHERE PRODUCT_NO = ? AND FILE_LEVEL=2
+   
+</entry>
+
+
+<entry key="fundingStoryProduct">
+
+	SELECT PRODUCT_TITLE,PRICE,COUNT,FUND_PRICE,DESCRIPTION,SELLER_NICKNAME,
+	END_DATE-SYSDATE AS "DATE",FUNDING_YN,
+	(500-COUNT)*(OPTION_PRICE+PRICE) "TOTAL"
+	FROM PRODUCT
+	JOIN P_OPTION USING(PRODUCT_NO)
+	WHERE PRODUCT_NO = ?
+
+</entry>
+
+<entry key="fundingStoryOption">
+
+	SELECT OPTION_NO,OPTION_NAME,OPTION_PRICE,OPTION_DESCRIPTION
+	FROM P_OPTION
+	WHERE PRODUCT_NO = ?
+
+</entry>
+
+
+
+<entry key="fundingStoryCategory">
+
+	SELECT CATEGORY_NO,CATEGORY_NAME
+	FROM CATEGORY
+    JOIN PRODUCT USING (CATEGORY_NO)
+	WHERE PRODUCT_NO = ?
+	
+</entry>
+
+<entry key="fundingStoryWishlist">
+
+	SELECT *
+	FROM WISH_LIST
+	WHERE USER_NO = ? AND PRODUCT_NO = ?
+	
+	
+</entry>
+
+<entry key="payResult">
+
+	INSERT INTO PAY_HISTORY
+	VALUES(SEQ_ONO.NEXTVAL,?,?,?,?,?,1,SYSDATE,DEFAULT,?,'C',DEFAULT)
+	
+</entry>
+
+<entry key="updateWishList">
+	
+	UPDATE WISH_LIST
+      SET WISH_STATUS =
+      CASE 
+      WHEN WISH_STATUS = 'Y' THEN 'N'
+      WHEN WISH_STATUS = 'N' THEN 'Y'
+      END
+      WHERE USER_NO = ? AND PRODUCT_NO = ?
+	
+</entry>
+
+<entry key="insertWishList">
+	
+	INSERT INTO WISH_LIST
+     VALUES(?,?,DEFAULT)
+	
+</entry>
+<entry key="payCountPlus">
+
+   UPDATE PRODUCT SET 
+   COUNT = COUNT -1
+   WHERE PRODUCT_NO = ?
+   
+
+</entry>	
+<!-- 용수 추가 -->
+<entry key="deleteProduct">
+		UPDATE PRODUCT
+		SET FUNDING_YN = 'E'
+		WHERE PRODUCT_NO = ?
+	</entry>
+	
+	<!-- 준호형 추가 -->
+	<entry key="selectProductNo">
+		SELECT PRODUCT_NO
+		FROM PRODUCT
+		WHERE FUNDING_YN = 'C'
+		ORDER BY PRODUCT_NO DESC 
+	</entry>
+
+</properties>

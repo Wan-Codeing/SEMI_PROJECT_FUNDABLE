@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="idCheck">
+	SELECT *
+	FROM MEMBER
+	WHERE USER_ID = ? 
+	</entry>
+	<entry key="insertMember">
+	INSERT INTO MEMBER
+	VALUES (SEQ_MNO.NEXTVAL , ? , ? , ? , ? , ? , ? , ? , ? ,SYSDATE, ?,'Y', 'N') 
+	</entry>
+
+	<entry key="loginMember">
+    SELECT *
+    FROM MEMBER
+    WHERE USER_ID = ? AND
+         USER_PWD = ? AND
+         USER_STATUS = 'Y'
+   </entry>
+   <entry key="insertSearch">
+   INSERT INTO SEARCH
+   VALUES (SEQ_SNO.NEXTVAL,?)
+   </entry>
+   
+   <entry key="selectListCount">
+        SELECT COUNT(*)
+        FROM MEMBER
+        ORDER BY USER_NO DESC
+    </entry>
+
+    <entry key="selectList">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT USER_NO,
+        USER_ID,
+        USER_NAME,
+        USER_NICKNAME,
+        USER_EMAIL,
+        USER_PHONE,
+        USER_ADDRESS,
+        ENTER_DATE,
+        USER_SSG,
+        USER_STATUS,
+		SELLER_YN,
+        USER_INTEREST
+        FROM MEMBER
+        ORDER BY USER_NO DESC) A)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="searchListCount0">
+        SELECT COUNT(*)
+        FROM (
+        SELECT USER_NO,
+		SELLER_YN
+        FROM MEMBER
+        WHERE USER_ID LIKE ? AND USER_STATUS = ?
+        ORDER BY USER_NO DESC) A
+        WHERE A.SELLER_YN = ?
+    </entry>
+
+    <entry key="searchListCount1">
+        SELECT COUNT(*)
+        FROM (
+        SELECT USER_NO,
+		SELLER_YN
+        FROM MEMBER
+        WHERE USER_NAME LIKE ? AND USER_STATUS = ?
+        ORDER BY USER_NO DESC) A
+        WHERE A.SELLER_YN = ?
+    </entry>
+
+    <entry key="searchList0">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT USER_NO,
+        USER_ID,
+        USER_NAME,
+        USER_NICKNAME,
+        USER_EMAIL,
+        USER_PHONE,
+        USER_ADDRESS,
+        ENTER_DATE,
+        USER_STATUS,
+		SELLER_YN,
+        USER_INTEREST
+        FROM MEMBER
+        WHERE USER_ID LIKE ? AND USER_STATUS = ?
+        ORDER BY USER_NO DESC) A
+        WHERE A.SELLER_YN = ?)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="searchList1">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT USER_NO,
+        USER_ID,
+        USER_NAME,
+        USER_NICKNAME,
+        USER_EMAIL,
+        USER_PHONE,
+        USER_ADDRESS,
+        ENTER_DATE,
+        USER_STATUS,
+		SELLER_YN,
+        USER_INTEREST
+        FROM MEMBER
+        WHERE USER_NAME LIKE ? AND USER_STATUS = ?
+        ORDER BY USER_NO DESC) A
+        WHERE A.SELLER_YN = ?)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="deleteMember">
+        DELETE FROM MEMBER
+        WHERE USER_NO = ?
+    </entry>
+
+    <entry key="banMember">
+        UPDATE MEMBER
+        SET USER_STATUS = 'N'
+        WHERE USER_NO = ?
+    </entry>
+
+    <entry key="releaseMember">
+        UPDATE MEMBER
+        SET USER_STATUS = 'Y'
+        WHERE USER_NO = ?
+    </entry>
+
+    <entry key="selectPayListCount">
+        SELECT COUNT(*)
+        FROM PAY_HISTORY
+        WHERE REFUND_STATUS IN ('Y', 'C')
+        ORDER BY ORDER_NO DESC
+    </entry>
+
+    <entry key="selectPayList">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT ORDER_NO,
+        USER_ID,
+        USER_NAME,
+        PRODUCT_TITLE,
+        DELIVERY,
+        FUNDING_DATE,
+        REFUND_STATUS
+        FROM PAY_HISTORY
+        JOIN MEMBER USING (USER_NO)
+        WHERE REFUND_STATUS IN ('Y', 'C')
+        ORDER BY ORDER_NO DESC) A)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="searchPayListCount0-a">
+        SELECT COUNT(*)
+        FROM PAY_HISTORY
+        JOIN MEMBER USING (USER_NO)
+        WHERE USER_ID LIKE ?
+        AND REFUND_STATUS IN ('Y', 'C')
+        ORDER BY ORDER_NO DESC
+    </entry>
+
+    <entry key="searchPayListCount1-a">
+        SELECT COUNT(*)
+        FROM PAY_HISTORY
+        JOIN MEMBER USING (USER_NO)
+        WHERE USER_NAME LIKE ?
+        AND REFUND_STATUS IN ('Y', 'C')
+        ORDER BY ORDER_NO DESC
+    </entry>
+
+    <entry key="searchPayListCount2-a">
+        SELECT COUNT(*)
+        FROM PAY_HISTORY
+        JOIN MEMBER USING (USER_NO)
+        WHERE ORDER_NO = ?
+        AND REFUND_STATUS IN ('Y', 'C')
+        ORDER BY ORDER_NO DESC
+    </entry>
+
+    <entry key="searchPayListCount0">
+        SELECT COUNT(*)
+        FROM PAY_HISTORY
+        JOIN MEMBER USING (USER_NO)
+        WHERE USER_ID LIKE ?
+        AND DELIVERY = ?
+        AND REFUND_STATUS IN ('Y', 'C')
+        ORDER BY ORDER_NO DESC
+    </entry>
+
+    <entry key="searchPayListCount1">
+        SELECT COUNT(*)
+        FROM PAY_HISTORY
+        JOIN MEMBER USING (USER_NO)
+        WHERE USER_NAME LIKE ?
+        AND DELIVERY = ?
+        AND REFUND_STATUS IN ('Y', 'C')
+        ORDER BY ORDER_NO DESC
+    </entry>
+
+    <entry key="searchPayListCount2">
+        SELECT COUNT(*)
+        FROM PAY_HISTORY
+        JOIN MEMBER USING (USER_NO)
+        WHERE ORDER_NO = ?
+        AND DELIVERY = ?
+        AND REFUND_STATUS IN ('Y', 'C')
+        ORDER BY ORDER_NO DESC
+    </entry>
+
+    <entry key="searchPayList0-a">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT ORDER_NO,
+        USER_ID,
+        USER_NAME,
+        PRODUCT_TITLE,
+        DELIVERY,
+        FUNDING_DATE,
+        REFUND_STATUS
+        FROM PAY_HISTORY
+        JOIN MEMBER USING (USER_NO)
+        WHERE USER_ID LIKE ?
+        AND REFUND_STATUS IN ('Y', 'C')
+        ORDER BY ORDER_NO DESC) A)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="searchPayList1-a">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT ORDER_NO,
+        USER_ID,
+        USER_NAME,
+        PRODUCT_TITLE,
+        DELIVERY,
+        FUNDING_DATE,
+        REFUND_STATUS
+        FROM PAY_HISTORY
+        JOIN MEMBER USING (USER_NO)
+        WHERE USER_NAME LIKE ?
+        AND REFUND_STATUS IN ('Y', 'C')
+        ORDER BY ORDER_NO DESC) A)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="searchPayList2-a">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT ORDER_NO,
+        USER_ID,
+        USER_NAME,
+        PRODUCT_TITLE,
+        DELIVERY,
+        FUNDING_DATE,
+        REFUND_STATUS
+        FROM PAY_HISTORY
+        JOIN MEMBER USING (USER_NO)
+        WHERE ORDER_NO = ?
+        AND REFUND_STATUS IN ('Y', 'C')
+        ORDER BY ORDER_NO DESC) A)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="searchPayList0">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT ORDER_NO,
+        USER_ID,
+        USER_NAME,
+        PRODUCT_TITLE,
+        DELIVERY,
+        FUNDING_DATE,
+        REFUND_STATUS
+        FROM PAY_HISTORY
+        JOIN MEMBER USING (USER_NO)
+        WHERE USER_ID LIKE ?
+        AND DELIVERY = ?
+        AND REFUND_STATUS IN ('Y', 'C')
+        ORDER BY ORDER_NO DESC) A)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="searchPayList1">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT ORDER_NO,
+        USER_ID,
+        USER_NAME,
+        PRODUCT_TITLE,
+        DELIVERY,
+        FUNDING_DATE,
+        REFUND_STATUS
+        FROM PAY_HISTORY
+        JOIN MEMBER USING (USER_NO)
+        WHERE USER_NAME LIKE ?
+        AND DELIVERY = ?
+        AND REFUND_STATUS IN ('Y', 'C')
+        ORDER BY ORDER_NO DESC) A)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="searchPayList2">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT ORDER_NO,
+        USER_ID,
+        USER_NAME,
+        PRODUCT_TITLE,
+        DELIVERY,
+        FUNDING_DATE,
+        REFUND_STATUS
+        FROM PAY_HISTORY
+        JOIN MEMBER USING (USER_NO)
+        WHERE ORDER_NO = ?
+        AND DELIVERY = ?
+        AND REFUND_STATUS IN ('Y', 'C')
+        ORDER BY ORDER_NO DESC) A)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="selectRefundListCount">
+        SELECT COUNT(*)
+        FROM PAY_HISTORY
+        WHERE REFUND_STATUS = ?
+        ORDER BY ORDER_NO DESC
+    </entry>
+
+    <entry key="selectRefundList">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT ORDER_NO,
+        USER_ID,
+        USER_NAME,
+        PRODUCT_TITLE,
+        DELIVERY,
+        FUNDING_DATE,
+        REFUND_STATUS
+        FROM PAY_HISTORY
+        JOIN MEMBER USING (USER_NO)
+        WHERE REFUND_STATUS = ?
+        ORDER BY ORDER_NO DESC) A)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="selectPay">
+        SELECT *
+        FROM PAY_HISTORY
+        WHERE ORDER_NO = ?
+    </entry>
+
+    <entry key="selectMember">
+        SELECT USER_NO,
+        USER_ID,
+        USER_NAME,
+        USER_NICKNAME,
+        USER_EMAIL,
+        USER_PHONE,
+        USER_ADDRESS,
+        ENTER_DATE,
+        USER_STATUS,
+		SELLER_YN,
+        USER_INTEREST
+        FROM MEMBER
+        WHERE USER_NO = ?
+    </entry>
+
+    <entry key="deletePay">
+        UPDATE PAY_HISTORY
+        SET REFUND_STATUS = 'N'
+        WHERE ORDER_NO = ?
+    </entry>
+
+    <entry key="selectMemberById">
+        SELECT USER_NO,
+        USER_ID,
+        USER_NAME,
+        USER_NICKNAME,
+        USER_EMAIL,
+        USER_PHONE,
+        USER_ADDRESS,
+        ENTER_DATE,
+        USER_STATUS,
+        SELLER_YN,
+        USER_INTEREST
+        FROM MEMBER
+        WHERE USER_ID = ?
+    </entry>
+   
+   <entry key="selectProfileImg">
+	SELECT CHANGE_NAME , FILE_PATH
+	FROM IMAGE
+	JOIN MEMBER USING(USER_NO)
+	WHERE USER_ID = ? AND FILE_LEVEL = 999 AND STATUS = 'Y'
+	</entry>
+	
+	
+	<entry key="selectProfileProductImg">
+	SELECT CHANGE_NAME , FILE_PATH
+	FROM MEMBER M
+	JOIN PAY_HISTORY P ON M.USER_NO = P.USER_NO
+	JOIN IMAGE USING(PRODUCT_NO)
+	WHERE USER_ID = ? AND FILE_LEVEL = 1 AND STATUS = 'Y'
+	ORDER BY P.FUNDING_DATE DESC
+	</entry>
+	
+	<entry key="selectProfileProductText">
+		SELECT H.ORDER_NO,
+		H.PRODUCT_NO,
+       H.PRODUCT_TITLE,
+       H.OPTION_NO,
+       O.OPTION_NAME,
+       H.TOTAL_PRICE,
+       H.FUNDING_DATE,
+       H.FUNDING_YN,
+       H.SELLER_NICKNAME,
+       H.DELIVERY,
+       H.REFUND_STATUS,
+       P.END_DATE
+		FROM MEMBER M
+		JOIN PAY_HISTORY H ON M.USER_NO = H.USER_NO
+		JOIN PRODUCT P ON H.PRODUCT_NO = P.PRODUCT_NO
+		JOIN P_OPTION O ON O.PRODUCT_NO = P.PRODUCT_NO
+		WHERE USER_ID = ?
+		ORDER BY H.FUNDING_DATE DESC
+	</entry>
+
+	
+	<entry key="selectWishImg">
+	SELECT ORIGIN_NAME, FILE_PATH
+	FROM WISH_LIST W
+	JOIN MEMBER M ON W.USER_NO = M.USER_NO
+	JOIN IMAGE USING(PRODUCT_NO)
+	WHERE W.USER_NO = ? AND FILE_LEVEL = 1 AND W.WISH_STATUS = 'Y'
+	ORDER BY PRODUCT_NO DESC
+	</entry>
+	
+	<entry key="selectWishp">
+		
+		SELECT PRODUCT_TITLE, SELLER_NICKNAME , PRODUCT_NO
+		FROM WISH_LIST W
+		JOIN MEMBER M ON W.USER_NO = M.USER_NO
+		JOIN PRODUCT USING(PRODUCT_NO)
+		WHERE W.USER_NO = ?  AND W.WISH_STATUS = 'Y'
+		ORDER BY PRODUCT_NO DESC
+	
+	</entry>
+	
+	<entry key="refundProduct">
+		UPDATE PAY_HISTORY
+		SET REFUND_STATUS = 'N'
+		WHERE ORDER_NO = ?
+	</entry>
+	
+	<entry key="myPageUpdateCount">
+      UPDATE PRODUCT
+      SET COUNT = COUNT+1
+      WHERE PRODUCT_NO = (SELECT PRODUCT_NO
+                           FROM PAY_HISTORY
+                           WHERE ORDER_NO = ?)
+   </entry>
+	
+	<entry key="refundRequest">
+		UPDATE PAY_HISTORY
+		SET REFUND_STATUS = 'C'
+		WHERE ORDER_NO = ?
+	</entry>
+	
+	<entry key="infoCheckPwd">
+		SELECT *
+		FROM MEMBER
+		WHERE USER_PWD = ? AND USER_ID = ?
+	</entry>
+	
+	
+	<entry key="updateMember">
+		UPDATE MEMBER
+		SET USER_NICKNAME = ? ,
+			USER_EMAIL = ? ,
+			USER_PWD = ? ,
+			USER_INTEREST = ?
+		WHERE USER_ID = ?
+	
+	</entry>
+	
+	
+	<entry key="selectMember1">
+		SELECT *
+		FROM MEMBER
+		WHERE USER_ID = ?
+	</entry>
+	
+	<entry key="insertImg">
+		INSERT INTO IMAGE (FILE_NUMBER,PRODUCT_NO,ORIGIN_NAME,CHANGE_NAME,FILE_SIZE,FILE_LEVEL,FILE_PATH,USER_NO)
+	VALUES(
+    SEQ_FNO.NEXTVAL,
+    999,
+    ?,
+    ?,
+    100,
+    999,
+    ?,
+    ?)
+	</entry>
+	
+	
+	<entry key="updateImg">
+		UPDATE IMAGE
+		SET ORIGIN_NAME = ? ,
+			CHANGE_NAME = ? ,
+			FILE_PATH = ?
+		WHERE USER_NO = ? AND FILE_LEVEL = 999
+			
+	</entry>
+	
+	
+	<entry key="deleteImg">
+	 	UPDATE IMAGE
+	 	SET STATUS = 'N'
+	 	WHERE USER_NO = ? AND FILE_LEVEL = 999
+	</entry>
+	
+
+		
+	<entry key="updateWish">
+		UPDATE WISH_LIST
+		SET WISH_STATUS =
+		CASE 
+		WHEN WISH_STATUS = 'Y' THEN 'N'
+		WHEN WISH_STATUS = 'N' THEN 'Y'
+		END
+		WHERE USER_NO = ? AND PRODUCT_NO = ?
+	</entry>
+	
+	
+	<entry key="selectQaList">
+		SELECT *
+		FROM QA
+		WHERE USER_NO = ?
+	
+	</entry>
+	
+	<entry key="selectSearchP">
+	
+		 SELECT CHANGE_NAME , FILE_PATH
+		FROM MEMBER M
+		JOIN PAY_HISTORY P ON M.USER_NO = P.USER_NO
+		JOIN IMAGE USING(PRODUCT_NO)
+		WHERE M.USER_NO = ? AND FILE_LEVEL = 1 AND STATUS = 'Y'
+		AND P.FUNDING_DATE BETWEEN TO_DATE( ? , 'YYYY-MM-DD') AND TO_CHAR(TO_DATE( ? , 'YYYY-MM-DD')-1, 'YYYY-MM-DD')
+	
+	</entry>
+	
+	
+	<entry key="searchTextList">
+			SELECT H.ORDER_NO,
+			H.PRODUCT_NO,
+       H.PRODUCT_TITLE,
+       H.OPTION_NO,
+       O.OPTION_NAME,
+       H.TOTAL_PRICE,
+       H.FUNDING_DATE,
+       H.FUNDING_YN,
+       H.SELLER_NICKNAME,
+       H.DELIVERY,
+       H.REFUND_STATUS,
+       P.END_DATE
+		FROM MEMBER M
+		JOIN PAY_HISTORY H ON M.USER_NO = H.USER_NO
+		JOIN PRODUCT P ON H.PRODUCT_NO = P.PRODUCT_NO
+		JOIN P_OPTION O ON O.PRODUCT_NO = P.PRODUCT_NO 
+		WHERE H.USER_NO = ? AND H.FUNDING_DATE BETWEEN TO_DATE( ? , 'YYYY-MM-DD') AND TO_CHAR(TO_DATE( ? , 'YYYY-MM-DD')-1 , 'YYYY-MM-DD')
+	</entry>
+	
+	
+	<entry key="myPageInsertSeller">
+		
+		UPDATE MEMBER
+    SET SELLER_YN = 'Y'
+    WHERE USER_NO = ?
+	
+	</entry>
+	
+	<entry key="jhDeleteMember">
+		UPDATE MEMBER
+		SET USER_STATUS = 'N' ,
+			SELLER_YN = 'N'
+		WHERE USER_NO = ?
+	</entry>
+	
+</properties>

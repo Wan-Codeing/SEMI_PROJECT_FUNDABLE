@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectBoardList">
+	SELECT
+		ARTICLE_NO,
+		CLICKVIEW,
+		ARTICLE_TITLE,
+		ARTICLE_CREATED_DATE
+	FROM NOTICE
+	ORDER BY ARTICLE_CREATED_DATE DESC 
+	</entry>
+	
+	<entry key="increaseCount">
+		UPDATE NOTICE
+		   SET CLICKVIEW = CLICKVIEW + 1
+		 WHERE ARTICLE_NO = ?
+	</entry>
+
+	<entry key="selectNotice">
+		SELECT ARTICLE_TITLE,
+		       ARTICLE_NO,
+		       ARTICLE_CONTENT,
+		       ARTICLE_CREATED_DATE
+		FROM NOTICE
+		WHERE ARTICLE_NO = ? 
+	</entry>
+	<entry key="selectListCount">
+		SELECT COUNT(*)
+		FROM NOTICE
+	</entry>
+	<entry key="selectList">
+		SELECT *
+		FROM (SELECT ROWNUM RNUM , A.*
+   			  FROM (SELECT
+         				ARTICLE_NO,
+						CLICKVIEW,
+						ARTICLE_TITLE,
+						ARTICLE_CREATED_DATE
+     				FROM NOTICE 
+     				ORDER BY ARTICLE_NO DESC) A
+	      	)
+	  	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="searchlist">
+		SELECT *
+		FROM (SELECT ROWNUM RNUM , A.*
+   			  FROM (SELECT
+         				ARTICLE_NO,
+						CLICKVIEW,
+						ARTICLE_TITLE,
+						ARTICLE_CREATED_DATE
+     				FROM NOTICE
+     				WHERE ARTICLE_TITLE LIKE ?
+     				ORDER BY ARTICLE_NO DESC) A
+	      	)
+	  	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="searchListCount">
+		SELECT COUNT(*)
+		FROM NOTICE
+		WHERE ARTICLE_TITLE LIKE ?
+	</entry>
+	<entry key="insertQa">
+		INSERT INTO QA
+		VALUES (SEQ_QNO.NEXTVAL, ?, ?, ?, ?, ?, SYSDATE, 'N', ?)
+	</entry>
+	<entry key="insertReport">
+		INSERT INTO REPORT
+		VALUES (SEQ_RNO.NEXTVAL, ?, ?, ?, ?, ?, ?, SYSDATE, ?, 'N')
+	</entry>
+	<entry key="insertReportImg">
+		INSERT INTO IMAGE
+		VALUES (SEQ_FNO.NEXTVAL, 88888, ?,?,?,100,?,SYSDATE,?,'Y')
+	</entry>
+	<entry key="deleteBoard">
+		DELETE FROM NOTICE
+		WHERE ARTICLE_NO = ?
+	</entry>
+	
+	<entry key="insertNotice">
+        INSERT INTO NOTICE
+        (
+        ARTICLE_NO, ARTICLE_TITLE, ARTICLE_CONTENT, ARTICLE_CREATED_DATE
+        ) VALUES (
+        SEQ_ANO.NEXTVAL, ?, ?, SYSDATE
+        )
+    </entry>
+
+    <entry key="selectListCount2">
+        SELECT COUNT(*)
+        FROM QA
+        ORDER BY QA_NO DESC
+    </entry>
+
+    <entry key="selectList2">
+        SELECT *
+        FROM(
+        	SELECT ROWNUM RNUM, A.*
+       		FROM(
+        		SELECT QA_NO,USER_NO,QA_TITLE,QA_CONTENT,QA_EMAIL,QA_PHONE,CREATE_DATE,QA_STATUS,QA_PERSON,USER_ID
+        		FROM QA
+        		JOIN MEMBER USING (USER_NO)
+        		WHERE QA_STATUS = 'N'
+        		ORDER BY QA_NO DESC) A)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="selectQuestion">
+        SELECT *
+        FROM QA
+        WHERE QA_NO = ?
+    </entry>
+
+    <entry key="replyQuestion">
+        UPDATE QA
+        SET QA_STATUS = 'Y'
+        WHERE QA_NO = ?
+    </entry>
+
+    <entry key="selectReListCount">
+        SELECT COUNT(*)
+        FROM REPORT
+        ORDER BY REPORT_NO DESC
+    </entry>
+
+    <entry key="selectReList">
+        SELECT *
+        FROM(
+        SELECT ROWNUM RNUM, A.*
+        FROM(
+        SELECT *
+        FROM REPORT
+        WHERE REPORT_STATUS = 'N'
+        ORDER BY REPORT_NO) A)
+        WHERE RNUM BETWEEN ? AND ?
+    </entry>
+
+    <entry key="selectReport">
+        SELECT *
+        FROM REPORT
+        WHERE REPORT_NO = ? AND REPORT_STATUS = 'N'
+    </entry>
+    
+    <entry key="selecReportImag">
+		SELECT M.FILE_PATH, M.CHANGE_NAME
+		FROM REPORT R
+		JOIN IMAGE M ON R.USER_NO = M.USER_NO
+		WHERE R.REPORT_NO = ? AND R.CREATED_DATE = M.UPLOAD_DATE
+	</entry>
+	
+	 <entry key="accessReport">
+        UPDATE REPORT
+        SET REPORT_STATUS = 'Y'
+        WHERE REPORT_NO = ?
+    </entry>
+</properties>
